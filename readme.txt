@@ -7,12 +7,16 @@ ruby, RVM, brew, and mysql. Just in case.
   1a. You can check if you have them installed already by running 
   `xcode-select -p`. If they are installed, you'll get a directory.
   Otherwise, you'll get an error.
-2. Install Homebrew.
-Run `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)`
+2. Install Homebrew. Run:
+`ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)`
   2a. You might need sudo password to do this.
 3. Use brew to install mysql: `brew install mysql`
-  3a. You'll need to also setup mysql to run on startup (and possible right now). Those
-  commands are given immediately after brew is done installing.
+  3a. You'll need to also setup mysql to run on startup (and possible right
+  now). Those commands are given immediately after brew is done installing.
+  3b. You'll also need to set the password on the admin user and/or create new
+  users for specific access points. As you'll see later, I just made it use 
+  root/admin so I've avoided a lot of specific steps about creating specific 
+  users.
 4. Install GPG and the RVM key:
 `brew install gpg`
 `command curl -sSL https://rvm.io/mpapis.asc | gpg --import -`
@@ -44,5 +48,9 @@ Instructions to run the server
   with these errors is to try and install each of the erroneous gems
   individually and deal with the problems for each one.
   So hopefully there's no errors.
-5. Run `rails server` to start the server
-  5a. This should by default start the webrique web server on localhost:3000
+5. Run `rake db:create db:migrate`
+  5a. I have my user/password set to root/admin, which is probably the least
+  secure thing ever. If you guys have a different setup on the machine this
+  is being run on, you'll want to change the config/database.yml file to match.
+6. Run `rails server` to start the server
+  5a. This should by default start the webrick web server on localhost:3000
