@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Loan amount:
+  = @loan_application.loan_amount
+%p
+  %b Prop value:
+  = @loan_application.prop_value
+%p
+  %b Ssn:
+  = @loan_application.ssn
+%p
+  %b Status:
+  = @loan_application.status
+
+= link_to 'Edit', edit_loan_application_path(@loan_application)
+\|
+= link_to 'Back', loan_applications_path

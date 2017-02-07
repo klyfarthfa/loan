@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  loan_amount: 1.5
+  prop_value: 1.5
+  ssn: MyString
+  status: MyString
+
+two:
+  loan_amount: 1.5
+  prop_value: 1.5
+  ssn: MyString
+  status: MyString
