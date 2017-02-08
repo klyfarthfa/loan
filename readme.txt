@@ -39,6 +39,9 @@ issues.  There shouldn't be, but there could.
 
 Instructions to run the server
 0. Setup assumes that you have compatible versions of ruby and mysql.
+  0a. This was also written in regards to the rails development environment
+  (RAILS_ENV=development). You may need to set the appropriate environment
+  if you are going to run in a different environment.
 1. Update rubygems: `gem update --system`
   1a. This is more or less a 'just in case' update.
 2. Install bundler: `gem install bundler`
@@ -54,3 +57,11 @@ Instructions to run the server
   is being run on, you'll want to change the config/database.yml file to match.
 6. Run `rails server` to start the server
   5a. This should by default start the webrick web server on localhost:3000
+
+
+Running tests
+0. Run steps 0-4 in the "Instructions to run the server" section if you haven't
+already.
+  0a. Also run `rake db:create` if you haven't already in step 5.
+1. Run `rake db:migrate RAILS_ENV=test`
+2. Run `rake test`
