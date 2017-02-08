@@ -37,7 +37,7 @@ If you don't want RVM to be used, instead of steps 4, 5, and 6, simply just run
 Ruby 2.2.4 is hardly the latest version though, so there could be compatibility
 issues.  There shouldn't be, but there could.
 
-Instructions to run the server
+Instructions to run the app server
 0. Setup assumes that you have compatible versions of ruby and mysql.
   0a. This was also written in regards to the rails development environment
   (RAILS_ENV=development). You may need to set the appropriate environment
@@ -58,6 +58,11 @@ Instructions to run the server
 6. Run `rails server` to start the server
   5a. This should by default start the webrick web server on localhost:3000
 
+Navigating the app
+There are only two pages on the app: The new form page (/loan_applications/new)
+which is also set as the root (so accessing localhost:3000 will take you to the
+same page), and the show page (/loan_applications/<id>, which simply gives the
+loan id and the status of the loan.
 
 Running tests
 0. Run steps 0-4 in the "Instructions to run the server" section if you haven't
@@ -66,3 +71,6 @@ already.
   0b. You should be in the loan application directory.
 1. Run `rake db:migrate RAILS_ENV=test`
 2. Run `rspec` or `bundle exec rspec`
+  2a. If this doesn't work, you can use the binstub command:
+  `bundle binstubs rspec-core`
+  This should allow you to run the specs with `bin/rspec` instead.

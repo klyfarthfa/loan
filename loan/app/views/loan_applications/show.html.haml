@@ -1,7 +1,7 @@
 .container
-  %h2 Your Loan Status
+  %h2 Loan Status
   %dl.dl-horizontal
     %dt Loan Id:
     %dd= @loan_application.id
     %dt Loan Status:
-    %dd= @loan_application.status
+    %dd= @loan_application.status.humanize
