@@ -45,7 +45,7 @@ Instructions to run the server
 1. Update rubygems: `gem update --system`
   1a. This is more or less a 'just in case' update.
 2. Install bundler: `gem install bundler`
-3. Navigate to the loan app directory. (<This directory>/loan)
+3. Navigate to the loan app directory (<this directory>/loan). `cd loan`
 4. Run `bundle install`
   4a. There might be errors here. Unfortunately, the only way I know to deal
   with these errors is to try and install each of the erroneous gems
@@ -63,5 +63,6 @@ Running tests
 0. Run steps 0-4 in the "Instructions to run the server" section if you haven't
 already.
   0a. Also run `rake db:create` if you haven't already in step 5.
+  0b. You should be in the loan application directory.
 1. Run `rake db:migrate RAILS_ENV=test`
-2. Run `rspec`
+2. Run `rspec` or `bundle exec rspec`
