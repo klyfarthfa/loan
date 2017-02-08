@@ -1,6 +1,7 @@
-%p
-  %b Loan Id:
-  = @loan_application.id
-%p
-  %b Loan Status:
-  = @loan_application.status
+.container
+  %h2 Your Loan Status
+  %dl.dl-horizontal
+    %dt Loan Id:
+    %dd= @loan_application.id
+    %dt Loan Status:
+    %dd= @loan_application.status
