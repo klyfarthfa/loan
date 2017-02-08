@@ -20,4 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      loan_application:
+        prop_value: Property Value
+        ssn: Social Security Number
+        loan_amount: Loan Amount
