@@ -32,7 +32,11 @@ RSpec.describe LoanApplicationsController, type: :controller do
   }
 
   let(:invalid_attributes) {
-    {}
+    {
+      loan_amount: '',
+      prop_value: '',
+      ssn: "555158423"
+    }
   }
 
   # This should return the minimal set of values that should be in the session

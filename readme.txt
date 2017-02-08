@@ -64,4 +64,4 @@ Running tests
 already.
   0a. Also run `rake db:create` if you haven't already in step 5.
 1. Run `rake db:migrate RAILS_ENV=test`
-2. Run `rake test`
+2. Run `rspec`
