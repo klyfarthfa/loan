@@ -1,18 +1,18 @@
 = form_for @loan_application do |f|
   - if @loan_application.errors.any?
     #error_explanation
-      %h2= "Loan Application could not be saved due to #{pluralize(@loan_application.errors.count, "error")}:"
+      %h4= "Application could not be submited due to #{pluralize(@loan_application.errors.count, "error")}:"
       %ul
         - @loan_application.errors.full_messages.each do |msg|
           %li= msg
 
-  .form-group
+  .form-group{:class=> ("has-error" if @loan_application.errors.has_key?(:loan_amount))}
     = f.label :loan_amount
     = f.number_field :loan_amount, {class: 'form-control'}
-  .form-group
+  .form-group{:class=> ("has-error" if @loan_application.errors.has_key?(:prop_value))}
     = f.label :prop_value
     = f.number_field :prop_value, {class: 'form-control'}
-  .form-group
+  .form-group{:class=> ("has-error" if @loan_application.errors.has_key?(:ssn))}
     = f.label :ssn
     = f.text_field :ssn, {class: 'form-control'}
   = f.submit 'Save', {class: 'btn btn-success'}
