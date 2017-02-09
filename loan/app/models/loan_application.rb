@@ -1,7 +1,7 @@
 class LoanApplication < ActiveRecord::Base
   VALID_STATUSES = ["accepted", "rejected"]
   validates :loan_amount, :prop_value, :ssn, presence: true
-  validates :loan_amount, :prop_value, numericality: true
+  validates :loan_amount, :prop_value, numericality: { greater_than_or_equal_to: 0 }
   validates :status, inclusion: { in: VALID_STATUSES, allow_blank: true }
   validates :ssn, length: { is: 9 }
   validate :ssn_is_valid

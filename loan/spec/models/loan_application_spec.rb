@@ -42,10 +42,16 @@ RSpec.describe LoanApplication, type: :model do
       end
     end
     
-    shared_examples 'a numerical field' do |parameter|
+    shared_examples 'a nonnegative numerical field' do |parameter|
       context 'is not a number' do
         before(:each) do
           params.merge!({ parameter => 'a black cat' })
+        end
+        it_should_behave_like 'an invalid application'
+      end
+      context 'is less than zero' do
+        before(:each) do
+          params.merge!({ parameter => -5046 })
         end
         it_should_behave_like 'an invalid application'
       end
@@ -60,7 +66,7 @@ RSpec.describe LoanApplication, type: :model do
         }
 
       it_should_behave_like 'a required presence', :loan_amount
-      it_should_behave_like 'a numerical field', :loan_amount
+      it_should_behave_like 'a nonnegative numerical field', :loan_amount
     end
 
     context 'prop value' do
@@ -71,7 +77,7 @@ RSpec.describe LoanApplication, type: :model do
         }
       }
       it_should_behave_like 'a required presence', :prop_value
-      it_should_behave_like 'a numerical field', :prop_value
+      it_should_behave_like 'a nonnegative numerical field', :prop_value
     end
   
     context 'ssn' do

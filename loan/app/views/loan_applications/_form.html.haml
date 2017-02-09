@@ -8,10 +8,10 @@
 
   .form-group{:class=> ("has-error" if @loan_application.errors.has_key?(:loan_amount))}
     = f.label :loan_amount
-    = f.number_field :loan_amount, {class: 'form-control'}
+    = f.number_field :loan_amount, {class: 'form-control', min: 0}
   .form-group{:class=> ("has-error" if @loan_application.errors.has_key?(:prop_value))}
     = f.label :prop_value
-    = f.number_field :prop_value, {class: 'form-control'}
+    = f.number_field :prop_value, {class: 'form-control', min: 0}
   .form-group{:class=> ("has-error" if @loan_application.errors.has_key?(:ssn))}
     = f.label :ssn
     = f.text_field :ssn, {class: 'form-control'}
