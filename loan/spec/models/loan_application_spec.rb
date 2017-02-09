@@ -82,8 +82,21 @@ RSpec.describe LoanApplication, type: :model do
         }
       }
       it_should_behave_like 'a required presence', :ssn
+      context 'is too long' do
+        before(:each) do
+          params.merge!({ssn: "5521837214219573148"})
+        end
+        it_should_behave_like 'an invalid application'
+      end
+      context 'is an invalid ssn number' do
+        before(:each) do
+          params.merge!({ssn: "000000000"})
+        end
+        it_should_behave_like 'an invalid application'
+      end
     end
   end
+
   describe '#status' do
     let(:params) {
       {
@@ -127,6 +140,82 @@ RSpec.describe LoanApplication, type: :model do
       let(:loan) { 40 }
       let(:value) { 100 }
       it { is_expected.to eq("accepted") }
+    end
+  end
+
+  # According to what I found on the internet, valid SSNs are
+  # a sequence of 9 numbers, divided into three groups [3,2,4].
+  # Any of these three groups can't be all zeroes, and the first three
+  # numbers also cannot be 900-999 or 666. It also can't match one of the
+  # two numbers that are considered fake.
+  describe '#ssn_is_valid' do
+    let!(:params) {
+      {
+        loan_amount: 1,
+        prop_value: 1
+      }
+    }
+    let(:loan) {
+      LoanApplication.new(params)
+    }
+    subject { loan.ssn_is_valid }
+
+    context "ssn is a fake number" do
+      before(:each) do
+        params.merge!({ssn: "078051120"})
+      end
+      it 'should add an error' do
+         expect { subject }.to change { loan.errors.count } 
+      end
+      it 'should give fake ssn message' do
+        subject
+        expect(loan.errors[:ssn]).to include("is a fake ssn")
+      end
+    end
+
+    shared_examples 'a invalid ssn' do
+      it 'should add an error' do
+        expect { subject }.to change { loan.errors.count } 
+      end
+      it 'should give invalid ssn message' do
+        subject
+        expect(loan.errors[:ssn]).to include("is invalid")
+      end
+    end
+
+    context "ssn starts with 000" do
+      before(:each) do
+        params.merge!({ssn: "000051120"})
+      end
+      it_should_behave_like 'a invalid ssn'
+    end
+
+    context "ssn starts with 666" do
+      before(:each) do
+        params.merge!({ssn: "666051120"})
+      end
+      it_should_behave_like 'a invalid ssn'
+    end
+
+    context "ssn starts with a number between 900 and 999" do
+      before(:each) do
+        params.merge!({ssn: "978051120"})
+      end
+      it_should_behave_like 'a invalid ssn'
+    end
+
+    context "ssn middle is 00" do
+      before(:each) do
+        params.merge!({ssn: "554001120"})
+      end
+      it_should_behave_like 'a invalid ssn'
+    end
+
+    context "ssn last four is 0000" do
+      before(:each) do
+        params.merge!({ssn: "554570000"})
+      end
+      it_should_behave_like 'a invalid ssn'
     end
   end
 end
